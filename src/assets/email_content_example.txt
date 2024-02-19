@@ -1,0 +1,4 @@
+Hello {name},
+I am sending you this email for this purpose {something}.
+Best,
+A.SMITH
