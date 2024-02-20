@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-
 import downloadSvg from '../assets/download.svg'
 import test_emails from '../assets/test_emails.txt'
 import email_content_example from '../assets/email_content_example.txt'
@@ -23,9 +22,11 @@ const Mailer = () => {
     link.click()
   }
 
-  const readContent = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const readContent = (
+    e: React.ChangeEvent<HTMLInputElement & { target: { files?: FileList } }>
+  ) => {
     const emailListPath = e.target.value
-    const file = (e as unknown as HTMLInputElement).target.files?.[0] // eslint-disable-line
+    const file = e.target.files?.[0] // eslint-disable-line
     setEmailListPath(emailListPath as string)
     // read file content
     const reader = new FileReader()
@@ -76,6 +77,9 @@ const Mailer = () => {
     <main className="flex-1 flex items-center justify-center text-white bg-slate-600">
       {/* Grid Form */}
       <form className="grid gap-4 m-4 p-4 bg-slate-700 rounded-md shadow-md w-full">
+        {/* <button className="w-full p-2 text-white bg-slate-800 rounded-md hover:bg-slate-900">
+          1. Authorize with Gmail
+        </button> */}
         <div className="flex items-center gap-2 justify-start">
           <label htmlFor="email">
             Email <span className="text-xs">(Email content example)</span>
